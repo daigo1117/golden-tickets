@@ -48,3 +48,22 @@
     background-color: #e67629;
   }
   
+  @media screen and (max-width: 480px) {
+    .form-container {
+      margin: 30px 16px;
+      padding: 24px;
+      font-size: 15px;
+    }
+  
+    input,
+    select,
+    button {
+      font-size: 15px;
+      padding: 10px;
+    }
+  
+    button {
+      font-size: 16px;
+    }
+  }
+  

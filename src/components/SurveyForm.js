@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"; // ← ここ！
 import { db } from "../firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +13,14 @@ const SurveyForm = () => {
     brandImage: "",
     howKnow: ""
   });
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const code = searchParams.get("code");
+
+  useEffect(() => {
+    console.log("code:", code);
+  }, []);
+  
 
   const navigate = useNavigate();
 

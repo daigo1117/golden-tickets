@@ -1,8 +1,8 @@
-// src/components/SurveyForm.js
 import React, { useState } from "react";
 import { db } from "../firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
-import { useNavigate } from "react-router-dom"; // ★ ページ遷移用
+import { useNavigate } from "react-router-dom";
+import "./SurveyForm.css"; // ← ★CSSを読み込み！
 
 const SurveyForm = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +13,7 @@ const SurveyForm = () => {
     howKnow: ""
   });
 
-  const navigate = useNavigate(); // ★ ページ遷移の関数
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -35,21 +35,20 @@ const SurveyForm = () => {
         ...formData,
         timestamp: Timestamp.now()
       });
-      navigate("/result"); // ★ 送信後に抽選ページへジャンプ！
+      navigate("/result");
     } catch (error) {
       console.error("Firestore保存エラー: ", error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ maxWidth: "400px", margin: "0 auto" }}>
+    <form onSubmit={handleSubmit} className="form-container">
       <h2>アンケートにご協力ください</h2>
 
       <label>
         メールアドレス（必須）：
         <input type="email" name="email" onChange={handleChange} required />
       </label>
-      <br /><br />
 
       <label>
         年齢：
@@ -60,7 +59,6 @@ const SurveyForm = () => {
           <option value="40代">40代</option>
         </select>
       </label>
-      <br /><br />
 
       <label>
         性別：
@@ -71,13 +69,11 @@ const SurveyForm = () => {
           <option value="その他">その他</option>
         </select>
       </label>
-      <br /><br />
 
       <label>
         エネリッシュのブランドイメージ：
         <input type="text" name="brandImage" onChange={handleChange} />
       </label>
-      <br /><br />
 
       <label>
         商品をどこで知ったか：
@@ -88,7 +84,6 @@ const SurveyForm = () => {
           <option value="知人から">知人から</option>
         </select>
       </label>
-      <br /><br />
 
       <button type="submit">送信して抽選へ進む</button>
     </form>

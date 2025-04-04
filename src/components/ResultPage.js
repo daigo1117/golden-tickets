@@ -16,7 +16,9 @@ const ResultPage = () => {
         const statsSnap = await getDoc(statsRef);
         const currentWins = statsSnap.data().winCount || 0;
 
-        const isDrawn = Math.random() < (5 / 3000);
+        const isDrawn = Math.random() < 0.5; // ← 50%の確率で当たり
+        //const isDrawn = Math.random() < (5 / 3000); // ← 本番用
+
 
         if (isDrawn && currentWins < 5) {
           await updateDoc(statsRef, {

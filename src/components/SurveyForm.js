@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom"; // ← ここ！
+import { useLocation, useNavigate } from "react-router-dom";
 import { db } from "../firebase";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
-import "./SurveyForm.css"; // ← ★CSSを読み込み！
+import {
+  collection,
+  addDoc,
+  Timestamp,
+  doc,
+  getDoc
+} from "firebase/firestore";
+import "./SurveyForm.css";
 
 const SurveyForm = () => {
   const [formData, setFormData] = useState({
@@ -13,16 +18,47 @@ const SurveyForm = () => {
     brandImage: "",
     howKnow: ""
   });
+
+  const [isCodeValid, setIsCodeValid] = useState(false); // ✅ QRコードが有効かどうか
   const location = useLocation();
+  const navigate = useNavigate();
+
   const searchParams = new URLSearchParams(location.search);
   const code = searchParams.get("code");
 
   useEffect(() => {
-    console.log("code:", code);
-  }, []);
-  
+    const checkCodeValidity = async () => {
+      if (!code) {
+        alert("QRコードが無効です");
+        return;
+      }
 
-  const navigate = useNavigate();
+      try {
+        const codeRef = doc(db, "codes", code);
+        const codeSnap = await getDoc(codeRef);
+
+        if (!codeSnap.exists()) {
+          alert("このQRコードは存在しません");
+          window.location.href = "/";
+          return;
+        }
+
+        if (codeSnap.data().used) {
+          alert("このQRコードはすでに使用されています");
+          window.location.href = "/";
+          return;
+        }
+
+        setIsCodeValid(true); // ✅ 有効なコードであればtrueにする
+        console.log("✅ このコードは有効です！");
+      } catch (error) {
+        console.error("コード確認中にエラーが発生しました", error);
+        alert("エラーが発生しました。もう一度お試しください。");
+      }
+    };
+
+    checkCodeValidity();
+  }, [code]);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -34,6 +70,11 @@ const SurveyForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!isCodeValid) {
+      alert("無効なQRコードです。抽選はできません。");
+      return;
+    }
+
     if (!formData.email) {
       alert("メールアドレスは必須です");
       return;
@@ -42,9 +83,11 @@ const SurveyForm = () => {
     try {
       await addDoc(collection(db, "usersResponses"), {
         ...formData,
-        timestamp: Timestamp.now()
+        timestamp: Timestamp.now(),
+        code: code // 念のため保存する
       });
-      navigate("/result");
+
+      navigate("/result?code=" + code); // 👈 次にcodeを渡すためにURLにも追加
     } catch (error) {
       console.error("Firestore保存エラー: ", error);
     }

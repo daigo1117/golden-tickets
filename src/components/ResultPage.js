@@ -72,7 +72,7 @@ const ResultPage = () => {
     transition={{ duration: 0.0 }} // ← ここでゆっくり消える時間指定
   >
     <video
-      src="/loading.mp4"
+      src="/loading-video.mp4"
       autoPlay
       loop
       muted

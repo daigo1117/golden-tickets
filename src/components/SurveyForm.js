@@ -22,44 +22,44 @@ const SurveyForm = () => {
     otherHowKnow: "",
   });
 
-  const [isCodeValid, setIsCodeValid] = useState(false);
+  const [isSerialValid, setIsSerialValid] = useState(false);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const code = searchParams.get("code");
+  const serial = searchParams.get("serial");
 
   useEffect(() => {
-    const checkCodeValidity = async () => {
-      if (!code) {
+    const checkSerialValidity = async () => {
+      if (!serial) {
         alert("QRコードが無効です");
         return;
       }
 
       try {
-        const codeRef = doc(db, "codes", code);
-        const codeSnap = await getDoc(codeRef);
+        const serialRef = doc(db, "serials", serial);
+        const serialSnap = await getDoc(serialRef);
 
-        if (!codeSnap.exists()) {
+        if (!serialSnap.exists()) {
           alert("このQRコードは存在しません");
           window.location.href = "/";
           return;
         }
 
-        if (codeSnap.data().used) {
+        if (serialSnap.data().used) {
           alert("このQRコードはすでに使用されています");
           window.location.href = "/";
           return;
         }
 
-        setIsCodeValid(true);
-        console.log("✅ このコードは有効です！");
+        setIsSerialValid(true);
+        console.log("✅ このシリアルは有効です！");
       } catch (error) {
-        console.error("コード確認中にエラーが発生しました", error);
+        console.error("シリアル確認中にエラーが発生しました", error);
         alert("エラーが発生しました。もう一度お試しください。");
       }
     };
 
-    checkCodeValidity();
-  }, [code]);
+    checkSerialValidity();
+  }, [serial]);
 
   const navigate = useNavigate();
 
@@ -92,7 +92,7 @@ const SurveyForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!isCodeValid) {
+    if (!isSerialValid) {
       alert("無効なQRコードです。抽選はできません。");
       return;
     }
@@ -111,13 +111,13 @@ const SurveyForm = () => {
           ? `その他: ${formData.otherHowKnow}`
           : formData.howKnow,
       timestamp: Timestamp.now(),
-      code: code,
+      serial: serial,
     };
 
     try {
       await addDoc(collection(db, "usersResponses"), finalData);
-      await updateDoc(doc(db, "codes", code), { used: true });
-      navigate("/result?code=" + code);
+      await updateDoc(doc(db, "serials", serial), { used: true });
+      navigate("/result?serial=" + serial);
     } catch (error) {
       console.error("Firestore保存エラー: ", error);
     }
@@ -157,10 +157,7 @@ const SurveyForm = () => {
 
       <label className="checkbox-group">
         『ENERICHE』のブランドイメージとマッチする単語を選んでください。（2個以内）
-        {[
-          "エネルギッシュ", "集中力", "リラックス", "刺激", "興奮",
-          "制御不能", "自信", "挑戦", "応援", "リフレッシュ"
-        ].map((label, idx) => (
+        {["エネルギッシュ", "集中力", "リラックス", "刺激", "興奮", "制御不能", "自信", "挑戦", "応援", "リフレッシュ"].map((label, idx) => (
           <span key={idx} className="checkbox-item">
             <input
               type="checkbox"

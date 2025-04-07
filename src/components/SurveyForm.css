@@ -1,73 +1,54 @@
-/* ResultPage.css */
-
-.result-container {
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(to bottom, #A0E8E0, #CBA3FF);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #a1ddf5, #c59cf4);
-  font-family: 'Arial', sans-serif;
-  text-align: center;
+}
+
+.form-container {
+  background: rgba(255, 255, 255, 0.85);
   padding: 2rem;
-  color: white;
-}
-
-/* 結果カード */
-.result-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  padding: 2rem 3rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(12px);
-  max-width: 400px;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
   width: 90%;
-  animation: fadeIn 1s ease;
+  margin: 2rem auto;
+  color: #333;
 }
 
-.result-card.win {
-  border: 2px solid #fff176;
-}
-
-.result-card.lose {
-  border: 2px solid #ff8a80;
-}
-
-.result-card .emoji {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.result-card .coupon {
-  margin-top: 1.5rem;
-  font-size: 1.2rem;
+label {
+  display: block;
+  margin: 1rem 0 0.5rem;
   font-weight: bold;
 }
 
-/* 🎯 ローディングスピナー */
-.spinner {
-  font-size: 3rem;
-  animation: spin 2s linear infinite;
+input,
+select {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  background: linear-gradient(to right, #9B7EDA, #CBA3FF);
   color: white;
-  background: transparent;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%;
 }
 
-/* アニメーション */
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+button[type="submit"]:hover {
+  background: linear-gradient(to right, #CBA3FF, #A0E8E0);
 }

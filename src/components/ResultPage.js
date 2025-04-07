@@ -63,18 +63,19 @@ const ResultPage = () => {
   return (
     <div className="result-container">
       <AnimatePresence>
-        {result === null && (
-          <motion.div
-            key="loading"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, rotate: 360 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1, repeat: Infinity }}
-            className="spinner"
-          >
-            🎯
-          </motion.div>
-        )}
+      {result === null && (
+  <motion.div
+    key="loading"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 1 }}
+    className="spinner"
+  >
+    🎯
+  </motion.div>
+)}
+
 
         {result === "win" && (
           <motion.div

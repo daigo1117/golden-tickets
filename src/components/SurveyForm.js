@@ -6,7 +6,8 @@ import {
   addDoc,
   Timestamp,
   doc,
-  getDoc
+  getDoc,
+  updateDoc,
 } from "firebase/firestore";
 import "./SurveyForm.css";
 
@@ -15,14 +16,14 @@ const SurveyForm = () => {
     email: "",
     age: "",
     gender: "",
-    brandImage: "",
-    howKnow: ""
+    brandImage: [],
+    howKnow: "",
+    eventName: "",
+    otherHowKnow: "",
   });
 
   const [isCodeValid, setIsCodeValid] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
-
   const searchParams = new URLSearchParams(location.search);
   const code = searchParams.get("code");
 
@@ -60,27 +61,32 @@ const SurveyForm = () => {
     checkCodeValidity();
   }, [code]);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+  const navigate = useNavigate();
 
-    if (name === "brandImage") {
-      setFormData((prev) => {
-        let updated = [...prev.brandImage];
-        if (checked) {
-          if (updated.length < 2) {
-            updated.push(value);
-          }
-        } else {
-          updated = updated.filter((item) => item !== value);
-        }
-        return { ...prev, brandImage: updated };
-      });
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value
-      }));
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleBrandImageChange = (e) => {
+    const value = e.target.value;
+    const checked = e.target.checked;
+
+    setFormData((prev) => {
+      const current = prev.brandImage || [];
+      if (checked) {
+        if (current.length >= 2) return prev;
+        return { ...prev, brandImage: [...current, value] };
+      } else {
+        return {
+          ...prev,
+          brandImage: current.filter((item) => item !== value),
+        };
+      }
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -96,13 +102,21 @@ const SurveyForm = () => {
       return;
     }
 
-    try {
-      await addDoc(collection(db, "usersResponses"), {
-        ...formData,
-        timestamp: Timestamp.now(),
-        code: code
-      });
+    const finalData = {
+      ...formData,
+      howKnow:
+        formData.howKnow === "イベント"
+          ? `イベント: ${formData.eventName}`
+          : formData.howKnow === "その他"
+          ? `その他: ${formData.otherHowKnow}`
+          : formData.howKnow,
+      timestamp: Timestamp.now(),
+      code: code,
+    };
 
+    try {
+      await addDoc(collection(db, "usersResponses"), finalData);
+      await updateDoc(doc(db, "codes", code), { used: true });
       navigate("/result?code=" + code);
     } catch (error) {
       console.error("Firestore保存エラー: ", error);
@@ -141,33 +155,23 @@ const SurveyForm = () => {
         </select>
       </label>
 
-      <label>
+      <label className="checkbox-group">
         『ENERICHE』のブランドイメージとマッチする単語を選んでください。（2個以内）
-        <div>
-          {[
-            "エネルギッシュ",
-            "集中力",
-            "リラックス",
-            "刺激",
-            "興奮",
-            "制御不能",
-            "自信",
-            "挑戦",
-            "応援",
-            "リフレッシュ"
-          ].map((option) => (
-            <label key={option} style={{ display: "block", marginLeft: "1rem" }}>
-              <input
-                type="checkbox"
-                name="brandImage"
-                value={option}
-                onChange={handleChange}
-                checked={formData.brandImage.includes(option)}
-              />
-              {option}
-            </label>
-          ))}
-        </div>
+        {[
+          "エネルギッシュ", "集中力", "リラックス", "刺激", "興奮",
+          "制御不能", "自信", "挑戦", "応援", "リフレッシュ"
+        ].map((label, idx) => (
+          <span key={idx} className="checkbox-item">
+            <input
+              type="checkbox"
+              name="brandImage"
+              value={label}
+              onChange={handleBrandImageChange}
+              checked={formData.brandImage.includes(label)}
+            />
+            {label}
+          </span>
+        ))}
       </label>
 
       <label>
@@ -191,8 +195,8 @@ const SurveyForm = () => {
 
       {formData.howKnow === "その他" && (
         <label>
-          その他の内容：
-          <input type="text" name="otherSource" onChange={handleChange} />
+          その他（自由記述）：
+          <input type="text" name="otherHowKnow" onChange={handleChange} />
         </label>
       )}
 

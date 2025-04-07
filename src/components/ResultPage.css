@@ -46,10 +46,24 @@
 /* 🎯 ローディングスピナー */
 .spinner {
   font-size: 3rem;
-  animation: spin 2s linear infinite;
+  animation: spin 1s linear infinite;
   color: white;
   background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
 }
+
+/* 🎯 消えるときのアニメーションを “即消え” に変更 */
+.spinner-exit {
+  opacity: 1;
+}
+.spinner-exit-active {
+  opacity: 0;
+  transition: opacity 0.1s ease-out;
+}
+
 
 /* アニメーション */
 @keyframes spin {

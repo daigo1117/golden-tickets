@@ -69,7 +69,7 @@ const ResultPage = () => {
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    transition={{ duration: 0.0 }} // ← ここでゆっくり消える時間指定
+    transition={{ duration: 0.0 }} 
   >
     <video
       src="/loading-video.mp4"
@@ -81,7 +81,7 @@ const ResultPage = () => {
         width: "100%",
         maxWidth: "400px",
         borderRadius: "12px",
-        transition: "opacity 0.0s ease-out" // ← CSS側でも保険かけておく
+        transition: "opacity 0.0s ease-out"
       }}
     />
   </motion.div>

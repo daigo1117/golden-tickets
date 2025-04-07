@@ -1,44 +1,65 @@
-/* リセットと基本設定 */
-html, body {
+/* ===== Reset & Base Style ===== */
+* {
   margin: 0;
   padding: 0;
-  height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #ffffff;
-  color: #333;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* アプリのルートが画面全体を使えるように */
-#root {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ボックスサイズの一貫性を保つ */
-*, *::before, *::after {
   box-sizing: border-box;
 }
 
-/* フォームやボタンのちょっとしたスタイル */
+html, body {
+  height: 100%;
+  font-family: 'Helvetica Neue', sans-serif;
+  background: none !important; /* ← 背景の二重設定を防ぐ */
+  overflow-x: hidden;
+}
+
+/* ===== App Root ===== */
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ===== Button Reset ===== */
 button {
+  font-family: inherit;
+  font-size: 1rem;
   cursor: pointer;
   border: none;
-  border-radius: 6px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #333;
+  transition: background 0.3s ease;
 }
 
 button:hover {
-  background-color: #eeeeee;
+  background-color: #e0e0e0;
 }
 
-select, input {
+/* ===== Input & Select Reset ===== */
+input, select {
+  font-family: inherit;
   font-size: 1rem;
-  padding: 8px;
-  border-radius: 4px;
+  padding: 0.5rem;
   border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 0.25rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+/* ===== Labels ===== */
+label {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: #222;
+}
+
+/* ===== Headings ===== */
+h1, h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
 }

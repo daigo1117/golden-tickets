@@ -1,16 +1,19 @@
 /* ResultPage.css */
 
 .result-container {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #a1ddf5, #c59cf4);
-  font-family: 'Arial', sans-serif;
-  text-align: center;
-  padding: 2rem;
-  color: white;
+
+  background: linear-gradient(to bottom, #a6e3f5 0%, #bfc8f0 50%, #d2a7ed 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;  /* ← coverより確実 */
+  margin: 0;
+  padding: 0;
 }
+
+
 
 /* 結果カード */
 .result-card {
@@ -46,14 +49,10 @@
 /* 🎯 ローディングスピナー */
 .spinner {
   font-size: 3rem;
-  animation: spin 1s linear infinite;
-  color: white;
-  background: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
+  z-index: 10;
+  background: none; /* 念のため追加 */
 }
+
 
 /* 🎯 消えるときのアニメーションを “即消え” に変更 */
 .spinner-exit {
@@ -61,7 +60,7 @@
 }
 .spinner-exit-active {
   opacity: 0;
-  transition: opacity 0.1s ease-out;
+  transition: opacity 0.0s ease-out;
 }
 
 

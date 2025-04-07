@@ -73,7 +73,7 @@ const ResultPage = () => {
     transition={{ duration: 0.5 }}
   >
     <video
-      src="/loading.mp4"
+  src="/loading-video.mp4"
       autoPlay
       loop
       muted

@@ -33,7 +33,7 @@ const ResultPage = () => {
   // 🎲 抽選処理
   useEffect(() => {
     const drawLottery = async () => {
-      await new Promise((r) => setTimeout(r, 2000)); // 2秒待機（演出）
+      await new Promise((r) => setTimeout(r, 5000)); // 5秒待機
 
       try {
         const statsRef = doc(db, "lotteryStats", "counter");
@@ -66,15 +66,23 @@ const ResultPage = () => {
       {result === null && (
   <motion.div
     key="loading"
+    className="video-loading"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    transition={{ duration: 0.1 }} // 👈 消えるとき0.1秒で即座に消える
-    className="spinner"
+    transition={{ duration: 0.5 }}
   >
-    🎯
+    <video
+      src="/loading.mp4"
+      autoPlay
+      loop
+      muted
+      playsInline
+      style={{ width: "100%", maxWidth: "400px", borderRadius: "12px" }}
+    />
   </motion.div>
 )}
+
 
 
 

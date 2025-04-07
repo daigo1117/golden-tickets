@@ -19,7 +19,7 @@ const SurveyForm = () => {
     howKnow: ""
   });
 
-  const [isCodeValid, setIsCodeValid] = useState(false); // ✅ QRコードが有効かどうか
+  const [isCodeValid, setIsCodeValid] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -49,7 +49,7 @@ const SurveyForm = () => {
           return;
         }
 
-        setIsCodeValid(true); // ✅ 有効なコードであればtrueにする
+        setIsCodeValid(true);
         console.log("✅ このコードは有効です！");
       } catch (error) {
         console.error("コード確認中にエラーが発生しました", error);
@@ -84,10 +84,10 @@ const SurveyForm = () => {
       await addDoc(collection(db, "usersResponses"), {
         ...formData,
         timestamp: Timestamp.now(),
-        code: code // 念のため保存する
+        code: code
       });
 
-      navigate("/result?code=" + code); // 👈 次にcodeを渡すためにURLにも追加
+      navigate("/result?code=" + code);
     } catch (error) {
       console.error("Firestore保存エラー: ", error);
     }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
-import { doc, getDoc, updateDoc, increment } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import "./ResultPage.css";
@@ -36,26 +36,14 @@ const ResultPage = () => {
       await new Promise((r) => setTimeout(r, 5000)); // 5秒待機
 
       try {
-        const statsRef = doc(db, "lotteryStats", "counter");
-        const statsSnap = await getDoc(statsRef);
-        const currentWins = statsSnap.data().winCount || 0;
-
         const isWinner = ["1007", "2222", "3333", "4444", "5555"].includes(serial);
-
-        if (isWinner && currentWins < 5) {
-          await updateDoc(statsRef, {
-            winCount: increment(1),
-          });
-          setResult("win");
-        } else {
-          setResult("lose");
-        }
+        setResult(isWinner ? "win" : "lose");
       } catch (err) {
         console.error("抽選エラー:", err);
         setResult("error");
       }
     };
-
+  
     drawLottery();
   }, [serial]);
 

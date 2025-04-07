@@ -9,9 +9,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<SurveyForm />} />
-        <Route path="/result" element={<ResultPage />} />
         <Route path="/serial" element={<EnterSerialPage />} />
+        <Route path="/form" element={<SurveyForm />} />  {/* ← ここを修正！ */}
+        <Route path="/result" element={<ResultPage />} />
+        <Route path="*" element={<EnterSerialPage />} />  {/* フォールバック用 */}
       </Routes>
     </Router>
   );

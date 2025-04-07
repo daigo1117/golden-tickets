@@ -62,25 +62,31 @@ const ResultPage = () => {
   return (
     <div className="result-container">
       <AnimatePresence>
-        {result === null && (
-          <motion.div
-            key="loading"
-            className="video-loading"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <video
-              src="/loading.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              style={{ width: "100%", maxWidth: "400px", borderRadius: "12px" }}
-            />
-          </motion.div>
-        )}
+      {result === null && (
+  <motion.div
+    key="loading"
+    className="video-loading"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.0 }} // ← ここでゆっくり消える時間指定
+  >
+    <video
+      src="/loading.mp4"
+      autoPlay
+      loop
+      muted
+      playsInline
+      style={{
+        width: "100%",
+        maxWidth: "400px",
+        borderRadius: "12px",
+        transition: "opacity 0.0s ease-out" // ← CSS側でも保険かけておく
+      }}
+    />
+  </motion.div>
+)}
+
 
         {result === "win" && (
           <motion.div

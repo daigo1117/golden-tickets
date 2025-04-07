@@ -13,9 +13,6 @@
   box-sizing: border-box;
 }
 
-
-
-
 .result-card {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 20px;
@@ -26,7 +23,6 @@
   width: 100%;
   text-align: center;
 }
-
 
 .result-card.win {
   border: 2px solid #fff176;
@@ -47,35 +43,11 @@
   font-weight: bold;
 }
 
-/* 🎯 ローディングスピナー */
-.spinner {
-  font-size: 3rem;
-  animation: spin 1.5s linear infinite;
-  color: white;
-  margin: auto;
+.video-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
-
-/* 回転アニメーション定義 */
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-
-
-/* 🎯 消えるときのアニメーションを “即消え” に変更 */
-.spinner-exit {
-  opacity: 1;
-}
-.spinner-exit-active {
-  opacity: 0;
-  transition: opacity 0.0s ease-out;
-}
-
-
 
 

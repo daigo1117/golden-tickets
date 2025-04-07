@@ -1,104 +1,73 @@
-/* SurveyForm.css / ResultPage.css 共通で使えるスタイル */
+/* ResultPage.css */
 
-body {
-  margin: 0;
-  font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
-  background: linear-gradient(to bottom, #A0E8E0, #CBA3FF);
-  min-height: 100vh;
+.result-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #333;
-}
-
-h2, h1 {
-  color: #333;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #a1ddf5, #c59cf4);
+  font-family: 'Arial', sans-serif;
   text-align: center;
-  font-weight: 600;
-}
-
-.form-container,
-.result-container {
-  background: rgba(255, 255, 255, 0.85);
   padding: 2rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  max-width: 500px;
-  width: 90%;
-  margin: 2rem auto;
-}
-
-label {
-  display: block;
-  margin: 1rem 0 0.5rem;
-  font-weight: bold;
-}
-
-input,
-select {
-  width: 100%;
-  padding: 0.6rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  box-sizing: border-box;
-}
-
-button[type="submit"] {
-  background: linear-gradient(to right, #9B7EDA, #CBA3FF);
   color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 2rem;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  width: 100%;
 }
 
-button[type="submit"]:hover {
-  background: linear-gradient(to right, #CBA3FF, #A0E8E0);
-}
-
-/* 抽選演出スピナー */
-.spinner {
-  font-size: 3rem;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-/* 結果カード共通 */
+/* 結果カード */
 .result-card {
-  padding: 2rem;
-  border-radius: 1.5rem;
-  text-align: center;
-  color: white;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2rem 3rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
   max-width: 400px;
-  margin: 0 auto;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  animation: fadeIn 1s ease;
 }
 
 .result-card.win {
-  background: linear-gradient(to right, #A0E8E0, #CBA3FF);
+  border: 2px solid #fff176;
 }
 
 .result-card.lose {
-  background: #ccc;
-  color: #333;
+  border: 2px solid #ff8a80;
 }
 
-.emoji {
+.result-card .emoji {
   font-size: 3rem;
   margin-bottom: 1rem;
 }
 
-.coupon {
-  margin-top: 1rem;
+.result-card .coupon {
+  margin-top: 1.5rem;
   font-size: 1.2rem;
   font-weight: bold;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 0.5rem;
-  border-radius: 0.5rem;
+}
+
+/* 🎯 ローディングスピナー */
+.spinner {
+  font-size: 3rem;
+  animation: spin 2s linear infinite;
+  color: white;
+  background: transparent;
+}
+
+/* アニメーション */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

@@ -6,29 +6,29 @@ import { useLocation } from "react-router-dom";
 import "./ResultPage.css";
 
 const ResultPage = () => {
-  const [result, setResult] = useState(null); // null:抽選中, "win", "lose"
+  const [result, setResult] = useState(null); // null: 抽選中, "win", "lose"
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const code = searchParams.get("code");
+  const serial = searchParams.get("serial"); // ← 修正されたパラメータ名
 
   // 🎯 使用済みにする処理（抽選後に実行）
   useEffect(() => {
-    const markCodeAsUsed = async () => {
-      if (!code) return;
+    const markSerialAsUsed = async () => {
+      if (!serial) return;
 
       try {
-        const codeRef = doc(db, "codes", code);
-        await updateDoc(codeRef, {
+        const serialRef = doc(db, "serials", serial);
+        await updateDoc(serialRef, {
           used: true
         });
-        console.log("✅ QRコードを使用済みにしました");
+        console.log("✅ シリアルナンバーを使用済みにしました");
       } catch (err) {
-        console.error("❌ QRコードの更新に失敗しました", err);
+        console.error("❌ シリアルの更新に失敗しました", err);
       }
     };
 
-    markCodeAsUsed();
-  }, [code]);
+    markSerialAsUsed();
+  }, [serial]);
 
   // 🎲 抽選処理
   useEffect(() => {
@@ -40,10 +40,9 @@ const ResultPage = () => {
         const statsSnap = await getDoc(statsRef);
         const currentWins = statsSnap.data().winCount || 0;
 
-        const isDrawn = Math.random() < 0.99; // テスト用に当選確率75%
-        // const isDrawn = Math.random() < (5 / 3000); // 本番は5/3000の確率
+        const isWinner = ["1007", "2222", "3333", "4444", "5555"].includes(serial);
 
-        if (isDrawn && currentWins < 5) {
+        if (isWinner && currentWins < 5) {
           await updateDoc(statsRef, {
             winCount: increment(1),
           });
@@ -58,33 +57,30 @@ const ResultPage = () => {
     };
 
     drawLottery();
-  }, []);
+  }, [serial]);
 
   return (
     <div className="result-container">
       <AnimatePresence>
-      {result === null && (
-  <motion.div
-    key="loading"
-    className="video-loading"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    transition={{ duration: 0 }}
-  >
-    <video
-  src="/loading-video.mp4"
-      autoPlay
-      loop
-      muted
-      playsInline
-      style={{ width: "100%", maxWidth: "400px", borderRadius: "12px" }}
-    />
-  </motion.div>
-)}
-
-
-
+        {result === null && (
+          <motion.div
+            key="loading"
+            className="video-loading"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <video
+              src="/loading.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              style={{ width: "100%", maxWidth: "400px", borderRadius: "12px" }}
+            />
+          </motion.div>
+        )}
 
         {result === "win" && (
           <motion.div
@@ -97,7 +93,9 @@ const ResultPage = () => {
             <div className="emoji">🎉🎊</div>
             <h1>おめでとうございます！</h1>
             <p>あなたは当選しました！</p>
-            <p className="coupon">🎁 クーポンコード：<strong>PEACH2025</strong></p>
+            <p className="coupon">
+              🎁 クーポンコード：<strong>PEACH2025</strong>
+            </p>
           </motion.div>
         )}
 

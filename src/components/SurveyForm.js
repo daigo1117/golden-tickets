@@ -61,10 +61,26 @@ const SurveyForm = () => {
   }, [code]);
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    const { name, value, type, checked } = e.target;
+
+    if (name === "brandImage") {
+      setFormData((prev) => {
+        let updated = [...prev.brandImage];
+        if (checked) {
+          if (updated.length < 2) {
+            updated.push(value);
+          }
+        } else {
+          updated = updated.filter((item) => item !== value);
+        }
+        return { ...prev, brandImage: updated };
+      });
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -106,9 +122,12 @@ const SurveyForm = () => {
         年齢：
         <select name="age" onChange={handleChange}>
           <option value="">選択してください</option>
+          <option value="10代">10代</option>
           <option value="20代">20代</option>
           <option value="30代">30代</option>
           <option value="40代">40代</option>
+          <option value="50代">50代</option>
+          <option value="60代以上">60代以上</option>
         </select>
       </label>
 
@@ -123,19 +142,59 @@ const SurveyForm = () => {
       </label>
 
       <label>
-        エネリッシュのブランドイメージ：
-        <input type="text" name="brandImage" onChange={handleChange} />
+        『ENERICHE』のブランドイメージとマッチする単語を選んでください。（2個以内）
+        <div>
+          {[
+            "エネルギッシュ",
+            "集中力",
+            "リラックス",
+            "刺激",
+            "興奮",
+            "制御不能",
+            "自信",
+            "挑戦",
+            "応援",
+            "リフレッシュ"
+          ].map((option) => (
+            <label key={option} style={{ display: "block", marginLeft: "1rem" }}>
+              <input
+                type="checkbox"
+                name="brandImage"
+                value={option}
+                onChange={handleChange}
+                checked={formData.brandImage.includes(option)}
+              />
+              {option}
+            </label>
+          ))}
+        </div>
       </label>
 
       <label>
         商品をどこで知ったか：
         <select name="howKnow" onChange={handleChange}>
           <option value="">選択してください</option>
-          <option value="Instagram">Instagram</option>
-          <option value="テレビ">テレビ</option>
+          <option value="X">X</option>
+          <option value="Amazonの検索結果">Amazonの検索結果</option>
           <option value="知人から">知人から</option>
+          <option value="イベント">イベント（イベント名記入）</option>
+          <option value="その他">その他（自由記述）</option>
         </select>
       </label>
+
+      {formData.howKnow === "イベント" && (
+        <label>
+          イベント名：
+          <input type="text" name="eventName" onChange={handleChange} />
+        </label>
+      )}
+
+      {formData.howKnow === "その他" && (
+        <label>
+          その他の内容：
+          <input type="text" name="otherSource" onChange={handleChange} />
+        </label>
+      )}
 
       <button type="submit">送信して抽選へ進む</button>
     </form>

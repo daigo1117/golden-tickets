@@ -10,6 +10,8 @@ const ResultPage = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const serial = searchParams.get("serial"); // ← 修正されたパラメータ名
+  console.log("🎫 渡ってきた serial:", serial);
+
 
   // 🎯 使用済みにする処理（抽選後に実行）
   useEffect(() => {

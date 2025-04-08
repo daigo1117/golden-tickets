@@ -1,17 +1,25 @@
-body,
-html {
+/* ✅ bodyとhtmlは一体でコントロールする */
+html,
+body {
   margin: 0;
   padding: 0;
-  min-height: 100vh; /* ✅ 最低でも画面全体に広げる */
+  min-height: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #A0E8E0, #CBA3FF);
 }
 
+/* ✅ ページ全体に広がる背景をつける */
 .entry-container {
+  min-height: 100vh; /* 画面の高さまでしっかり伸ばす */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 2rem 1rem;
   font-family: 'Segoe UI', sans-serif;
   color: #222;
-  background: linear-gradient(to bottom, #A0E8E0, #CBA3FF);
-  min-height: 100vh; /* ✅ 背景が画面の高さをカバー */
+  background: transparent; /* 🔄 背景はbodyにあるのでここでは透明 */
 }
+
 
   
   

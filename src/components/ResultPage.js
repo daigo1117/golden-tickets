@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import "./ResultPage.css";
@@ -33,7 +33,7 @@ const ResultPage = () => {
   // 🎲 抽選処理
 useEffect(() => {
   const drawLottery = async () => {
-    await new Promise((r) => setTimeout(r, 5000)); // 5秒待機
+    await new Promise((r) => setTimeout(r, 6000)); // 6秒待機
 
     try {
       const serialRef = doc(db, "serials", serial);

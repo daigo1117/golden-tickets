@@ -1,93 +1,84 @@
-/* src/components/EntryOverviewPage.css */
-
-.overview-container {
+.entry-container {
+    padding: 2rem 1rem;
     font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to bottom, #A0E8E0, #CBA3FF);
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     color: #222;
+    background: linear-gradient(to bottom, #A0E8E0, #CBA3FF);
+    min-height: 100vh;
   }
   
-  .section {
+  .entry-inner {
+    max-width: 500px;
+    margin: 0 auto;
     background-color: white;
-    padding: 2rem 1rem;
-    border-radius: 12px;
-    max-width: 400px;
-    width: 100%;
-    margin-bottom: 2rem;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
     text-align: center;
   }
   
-  .title {
-    font-size: 1.3rem;
+  h1 {
+    font-size: 1.2rem;
     font-weight: bold;
-    line-height: 1.5;
-    margin-bottom: 1.5rem;
-  }
-  
-  .main-can {
-    width: 120px;
-    margin: 0 auto 1.2rem;
-    display: block;
-  }
-  
-  .subtitle {
-    font-size: 1rem;
     margin-bottom: 1rem;
+    line-height: 1.6;
   }
   
-  .entry-button {
-    padding: 0.75rem 1rem;
-    background: linear-gradient(to right, #A0E8E0, #CBA3FF);
-    color: #222;
+  img {
+    width: 10%;
+    height: auto;
+    margin: 0.3rem auto;
+  }
+  
+  .highlight {
     font-weight: bold;
-    border: none;
-    border-radius: 24px;
-    font-size: 1rem;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    margin: 1rem auto;
-    display: block;
-    width: 70%;
-    max-width: 220px;
-  }
-  
-  .label {
     background-color: black;
     color: white;
-    font-weight: bold;
-    padding: 0.4rem 0;
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
     margin: 1rem 0 0.5rem;
-  }
-  
-  .prizes {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
-    margin-top: 1rem;
-  }
-  
-  .prize-item {
-    text-align: center;
     font-size: 0.85rem;
   }
   
-  .prize-item img {
-    height: 60px;
-    margin-bottom: 0.3rem;
+  .product-grid {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 1rem;
+    margin: 0.5rem 0;
+  }
+  
+  .product-item {
+    width: 45%;
+    font-size: 0.8rem;
+  }
+  
+  .draw-button {
+    background: linear-gradient(to right, #A0E8E0, #CBA3FF);
+    border: none;
+    border-radius: 20px;
+    padding: 0.7rem 1.2rem;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 1rem 0;
+    cursor: pointer;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+  }
+  
+  .draw-button:hover {
+    transform: translateY(-2px);
+  }
+  
+  .steps {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.8;
   }
   
   .arrow {
-    color: #d33;
     font-size: 1.2rem;
-    font-weight: bold;
-    margin: 0.3rem 0;
-  }
-  
-  .notice p {
+    color: #f44336;
     margin: 0.3rem 0;
   }
   

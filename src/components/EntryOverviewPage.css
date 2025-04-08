@@ -32,7 +32,7 @@ html {
   }
   
   img {
-    width: 10%;
+    width: 50%; /* 🖼️ 全体の画像サイズを今までの50%に圧縮 */
     height: auto;
     margin: 0.3rem auto;
   }
@@ -67,7 +67,7 @@ html {
     padding: 0.7rem 1.2rem;
     font-weight: bold;
     font-size: 1rem;
-    margin: 1rem 0;
+    margin: 1rem auto; /* ⬅️ 自動マージンで中央寄せ */
     cursor: pointer;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
     transition: all 0.2s ease;

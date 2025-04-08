@@ -31,21 +31,32 @@ const ResultPage = () => {
   }, [serial]);
 
   // 🎲 抽選処理
-  useEffect(() => {
-    const drawLottery = async () => {
-      await new Promise((r) => setTimeout(r, 5000)); // 5秒待機
+useEffect(() => {
+  const drawLottery = async () => {
+    await new Promise((r) => setTimeout(r, 5000)); // 5秒待機
 
-      try {
-        const isWinner = ["1007", "2222", "3333", "4444", "5555"].includes(serial);
-        setResult(isWinner ? "win" : "lose");
-      } catch (err) {
-        console.error("抽選エラー:", err);
+    try {
+      const serialRef = doc(db, "serials", serial);
+      const serialSnap = await getDoc(serialRef);
+
+      if (!serialSnap.exists()) {
         setResult("error");
+        return;
       }
-    };
-  
-    drawLottery();
-  }, [serial]);
+
+      const data = serialSnap.data();
+      const isWinner = data.isWinner === true;
+
+      setResult(isWinner ? "win" : "lose");
+    } catch (err) {
+      console.error("抽選エラー:", err);
+      setResult("error");
+    }
+  };
+
+  drawLottery();
+}, [serial]);
+
 
   return (
     <div className="result-container">

@@ -1,4 +1,3 @@
-// src/components/EntryOverviewPage.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./EntryOverviewPage.css";
@@ -6,37 +5,50 @@ import "./EntryOverviewPage.css";
 const EntryOverviewPage = () => {
   const navigate = useNavigate();
 
-  const handleNext = () => {
+  const handleClick = () => {
     navigate("/serial");
   };
 
   return (
-    <div className="entry-container">
-      <div className="entry-card">
-        <h1>ENERICHEが当たる抽選に参加しよう！</h1>
-        <p className="entry-subtext">
-          シリアルナンバーを使って、豪華景品が当たるチャンス！
-        </p>
+    <div className="overview-container">
+      <h1 className="campaign-title">ENERICHE ピーチ発売記念<br />＼プレゼントキャンペーン／</h1>
 
-        <div className="entry-images">
-          <img src="/can.png" alt="ENERICHE缶" />
-          <img src="/tumbler.png" alt="タンブラー" />
+      <div className="main-visual">
+        <img src="/can.png" alt="ENERICHE缶" className="can-image" />
+        <p className="headline">抽選で5名様に<br />豪華景品プレゼント！</p>
+        <button className="lottery-button" onClick={handleClick}>
+          今すぐ抽選！▶
+        </button>
+      </div>
+
+      <div className="limited-info">
+        <div className="label">数量限定！</div>
+        <p>先着2,700ケース<br />なくなり次第終了</p>
+      </div>
+
+      <div className="prize-section">
+        <div className="label">豪華景品！</div>
+        <div className="prizes">
+          <div className="prize">
+            <img src="/can.png" alt="ENERICHE一年分" />
+            <p>ENERICHE一年分<br />（12ケース）</p>
+          </div>
+          <div className="prize">
+            <img src="/tumbler.png" alt="タンブラー" />
+            <p>〇〇×ENERICHE<br />コラボタンブラー</p>
+          </div>
         </div>
+      </div>
 
-        <h2>参加方法はとってもカンタン！</h2>
-        <ol className="entry-steps">
-          <li>ENERICHE缶についているシリアルナンバーをチェック</li>
-          <li>簡単なアンケートに答える</li>
-          <li>その場ですぐに抽選結果がわかる！</li>
-        </ol>
-
-        <div className="entry-note">
-          ※景品が無くなり次第終了となります。<br />
-          ※シリアルナンバー1つにつき、1回のみご参加いただけます。
-        </div>
-
-        <button className="start-button" onClick={handleNext}>
-          抽選に進む
+      <div className="how-to">
+        <div className="label">応募方法</div>
+        <p>シールに記載しているシリアルナンバーを入力</p>
+        <p>↓</p>
+        <p>アンケートに回答</p>
+        <p>↓</p>
+        <p>その場で結果が分かる！</p>
+        <button className="lottery-button" onClick={handleClick}>
+          今すぐ抽選！▶
         </button>
       </div>
     </div>

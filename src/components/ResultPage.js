@@ -89,43 +89,70 @@ useEffect(() => {
 )}
 
 
-        {result === "win" && (
-          <motion.div
-            key="win"
-            className="result-card win"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
-            <div className="emoji">🎉🎊</div>
-            <h1>おめでとうございます！</h1>
-            <p>あなたは当選しました！</p>
-            <p className="coupon">
-              🎁 クーポンコード：<strong>PEACH2025</strong>
-            </p>
-          </motion.div>
-        )}
+{result === "win" && (
+  <motion.div
+    key="win"
+    className="result-card win"
+    initial={{ scale: 0 }}
+    animate={{ scale: 1 }}
+    transition={{ type: "spring", stiffness: 200 }}
+  >
+    <div className="emoji">🎉🎊</div>
+    <h1>おめでとうございます！</h1>
+    <p>あなたは当選しました！</p>
+    <p className="coupon">
+      🎁 クーポンコード：<strong>PEACH2025</strong>
+    </p>
+    <button
+      onClick={() => window.location.href = "https://eneriche.jp"}
+      className="back-button"
+    >
+      トップに戻る
+    </button>
+  </motion.div>
+)}
 
-        {result === "lose" && (
-          <motion.div
-            key="lose"
-            className="result-card lose"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <div className="emoji">😢</div>
-            <h1>残念…ハズレです</h1>
-            <p>またのご参加をお待ちしています！</p>
-          </motion.div>
-        )}
 
-        {result === "error" && (
-          <p>エラーが発生しました。もう一度お試しください。</p>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-};
+{result === "lose" && (
+  <motion.div
+    key="lose"
+    className="result-card lose"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 1 }}
+  >
+    <div className="emoji">😢</div>
+    <h1>残念…ハズレです</h1>
+    <p>またのご参加をお待ちしています！</p>
+    <button
+      onClick={() => window.location.href = "https://eneriche.jp"}
+      className="back-button"
+    >
+      トップに戻る
+    </button>
+  </motion.div>
+)}
+
+
+{result === "error" && (
+  <motion.div
+    key="error"
+    className="result-card"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 1 }}
+  >
+    <div className="emoji">⚠️</div>
+    <h1>エラーが発生しました</h1>
+    <p>もう一度お試しください。</p>
+    <button
+      onClick={() => window.location.href = "https://eneriche.jp"}
+      className="back-button"
+    >
+      トップに戻る
+    </button>
+  </motion.div>
+)}
+
 
 export default ResultPage;

@@ -15,7 +15,7 @@ const EntryOverviewPage = () => {
       <div className="entry-inner">
         <h1>ENERICHE ピーチ発売記念<br />＼プレゼントキャンペーン／</h1>
 
-        <img src="/peach_can.png" alt="peach_can.png" />
+        <img className="top-img" src="/peach_can.png" alt="peach_can.png" />
         <p>抽選で5名様に<br /><strong>豪華景品プレゼント！</strong></p>
 
         <button className="draw-button" onClick={handleClick}>

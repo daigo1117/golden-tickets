@@ -10,74 +10,85 @@ body {
   }
   
   .entry-container {
-    max-width: 480px;
-    width: 90%;
-    background: white;
-    padding: 2rem 1.5rem;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    text-align: center;
-    color: #222;
+    padding: 2rem;
+    color: #333;
+    background: linear-gradient(to bottom, #A0E8E0, #CBA3FF);
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
-  .entry-container h1 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .entry-container .highlight {
+  .entry-title {
+    font-size: 1.8rem;
     font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .entry-subtitle {
     font-size: 1.1rem;
-    color: #d32f2f;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .entry-images {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .entry-images img {
+    width: 150px;
+    max-width: 40vw;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    background: white;
+    padding: 1rem;
+  }
+  
+  .entry-steps {
+    margin-top: 2rem;
+    text-align: center;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+  
+  .entry-steps h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  
+  .entry-steps p {
     margin: 0.5rem 0;
   }
   
-  .entry-container img.main-product {
-    width: 60%;
-    max-width: 200px;
-    margin: 1.5rem auto;
-    display: block;
-  }
-  
-  .entry-container .prize-images {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .entry-container .prize-images img {
-    width: 80px;
-    height: auto;
-  }
-  
-  .entry-container .steps {
-    text-align: left;
+  .entry-button {
     margin-top: 2rem;
-    font-size: 0.9rem;
-  }
-  
-  .entry-container .steps li {
-    margin-bottom: 0.5rem;
-  }
-  
-  .entry-container button {
-    margin-top: 2rem;
-    padding: 0.8rem 1.2rem;
-    background: linear-gradient(to right, #A0E8E0, #CBA3FF);
+    padding: 0.8rem 2rem;
+    background: linear-gradient(to right, #a1c4fd, #c2e9fb);
     border: none;
-    border-radius: 8px;
-    font-weight: bold;
+    border-radius: 24px;
     font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
-    transition: transform 0.2s ease;
-    width: 100%;
+    transition: 0.3s;
   }
   
-  .entry-container button:hover {
-    transform: scale(1.03);
+  .entry-button:hover {
+    background: linear-gradient(to right, #89f7fe, #66a6ff);
   }
+  
   
   .entry-container .now-button {
     margin-top: 1rem;

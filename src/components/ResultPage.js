@@ -112,7 +112,6 @@ useEffect(() => {
   </motion.div>
 )}
 
-
 {result === "lose" && (
   <motion.div
     key="lose"
@@ -133,7 +132,6 @@ useEffect(() => {
   </motion.div>
 )}
 
-
 {result === "error" && (
   <motion.div
     key="error"
@@ -153,6 +151,10 @@ useEffect(() => {
     </button>
   </motion.div>
 )}
+
+</AnimatePresence>
+</div>
+
 
 
 export default ResultPage;

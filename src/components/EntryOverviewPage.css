@@ -2,17 +2,18 @@ body,
 html {
   margin: 0;
   padding: 0;
-  height: 100%; /* 🔄 背景が途中で切れないよう全体に広げる */
+  min-height: 100vh; /* ✅ 最低でも画面全体に広げる */
 }
 
 .entry-container {
-    padding: 2rem 1rem;
-    font-family: 'Segoe UI', sans-serif;
-    color: #222;
-    background: linear-gradient(to bottom, #A0E8E0, #CBA3FF);
-    min-height: 100%; /* 🔄 100vh から 100% に変更して自然な高さに */
-    height: 100%;      /* ✅ ページ全体に背景を行き渡らせる */
-  }
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+  background: linear-gradient(to bottom, #A0E8E0, #CBA3FF);
+  min-height: 100vh; /* ✅ 背景が画面の高さをカバー */
+}
+
+  
   
   .entry-inner {
     max-width: 500px;
